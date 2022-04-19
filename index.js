@@ -40,22 +40,18 @@ function calculateImc() {
     var alturaEl = document.querySelector('#altura');
     var pesoEl = document.querySelector('#peso');
 
-    var height = parseFloat(alturaEl.value);
-    var weight = parseFloat(pesoEl.value);
-    
-    document.querySelector('#imc').innerHTML = new Dietician(height, weight, 1234).calculateImc();
-    document.querySelector('#diet').innerHTML = new Athlete(height, weight, 1234).calculateDiet();
+    return function() {
+        var height = parseFloat(alturaEl.value);
+        var weight = parseFloat(pesoEl.value);
+        
+        document.querySelector('#imc').innerHTML = new Dietician(height, weight, 1234).calculateImc();
+        document.querySelector('#diet').innerHTML = new Athlete(height, weight, 1234).calculateDiet();
+    }
 }
 
-function imcBuilder(height, weight) {
-
-    this.height = height;
-    this.weight = weight;
-    
-}
 
 window.onload = function(evt) {
     var btn = document.querySelector(".form button");
     
-    btn.addEventListener("click", function() { calculateImc() });
+    btn.addEventListener("click", calculateImc());
 }
